@@ -22,3 +22,14 @@ create table education(
     field_of_study varchar(50) not null,
     description varchar(200) not null
 );
+
+DROP TABLE IF EXISTS job;
+create table job(
+    company_name varchar(20) not null,
+    industry varchar(20) not null,
+    job_title varchar(20) not null,
+    country varchar(20) not null,
+    job_poster varchar(50) not null,
+    description varchar(200) not null
+);
+
