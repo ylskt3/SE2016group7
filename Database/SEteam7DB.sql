@@ -20,7 +20,7 @@ create table employer(
 
 DROP TABLE IF EXISTS experience;
 create table experience(
-	university_id int not null auto_increment,
+	university_id int references education(university_id),
 	job_id int references job(job_id),
     company_name varchar(20) not null,
     title varchar(50) not null,
