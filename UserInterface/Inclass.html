@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript</title>
+    <script src="app.js"> </script>
+    <script>
+    
+     //  alert("Hello World");
+      //  console.log("Hello World!");
+        var languages = [];
+        languages.push("German", "French", "Spanish");
+    //    languages.push("French");
+       // languages.push("Spanish");
+        console.log(languages);
+        
+        //Fucntion declaration
+       /* function domLoaded() {
+
+        var para = document.getElementById("hello");
+        para.innerHTML = "This is changed in the head!";
+        }*/
+        
+        //Function expression
+        var domLoaded = function() {
+            var para = document.getElementById("hello");
+        para.innerHTML = "This is changed in the head!";
+        }  
+        
+        var domReallyDidLoad = domLoaded;
+    </script>
+</head>
+<body onload="domReallyDidLoad()">
+    <p id="hello">Hello. paragraph.</p>
+    <script>
+    
+    console.log("Hello!");
+     var para = document.getElementById("hello");
+        para.innerHTML = "This is changed in the body!";
+    
+    </script>
+</body>
+</html>
