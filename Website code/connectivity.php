@@ -37,7 +37,7 @@ function SignIn()
     if(!empty($row['userName']) AND !empty($row['pass']))
     {
       $_SESSION['userName'] = $row['pass'];
-      header("Location: user.php");
+      header("Location: home/home.php");
       exit;
     }
   }

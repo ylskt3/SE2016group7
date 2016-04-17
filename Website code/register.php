@@ -9,12 +9,13 @@ if(isset($_POST['register']))
   $result = $db_handle->insertQuery($query);
   if(!empty($result)) 
   {
-    header("Location: index.php");
+    header("Location: home/home.php");
     unset($_POST);
   } 
   else 
   {
-    header("Location: user.php");
+    echo "ERROR"; 
+    header("Location: index.php");
   }
 }
 ?>
