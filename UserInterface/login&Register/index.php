@@ -105,7 +105,6 @@
 	                    <form role="form" action="register.php" method="post" class="registration-form">
 	                    	<div class="form-group">
 	                    		<label class="sr-only" for="form-first-name">First name</label>
-<<<<<<< HEAD:UserInterface/login&Register/index.php
 	                        	<input type="text" name="first_name" placeholder="First name" class="form-first-name form-control" id="form-first-name">
 	                        </div>
 	                        <div class="form-group">
@@ -119,21 +118,6 @@
                             <div class="form-group">
 			                        	<label class="sr-only" for="register-password">Password</label>
 			                        	<input type="password" name="reg_pass" placeholder="Password" class="form-password form-control" id="register-password">
-=======
-	                        	<input type="text" name="form-first-name" placeholder="First name" class="form-first-name form-control" id="form-first-name">
-	                        </div>
-	                        <div class="form-group">
-	                        	<label class="sr-only" for="form-last-name">Last name</label>
-	                        	<input type="text" name="form-last-name" placeholder="Last name" class="form-last-name form-control" id="form-last-name">
-	                        </div>
-                            <div class="form-group">
-	                        	<label class="sr-only" for="form-user-name">User name</label>
-	                        	<input type="text" name="form-user-name" placeholder="Username" class="form-user-name form-control" id="form-user-name">
-	                        </div>
-                            <div class="form-group">
-			                        	<label class="sr-only" for="register-password">Password</label>
-			                        	<input type="password" name="register-password" placeholder="Password" class="form-password form-control" id="register-password">
->>>>>>> 0703ef97b324cbd901acb4f344f33141dac4646f:UserInterface/login&Register/index.html
 			                </div>
                             <div class="form-group">
 			                        	<label class="sr-only" for="confirm-password">ConfirmPassword</label>
@@ -142,11 +126,7 @@
 			                </div>
 	                        <div class="form-group">
 	                        	<label class="sr-only" for="form-email">Email</label>
-<<<<<<< HEAD:UserInterface/login&Register/index.php
 	                        	<input type="text" name="email" placeholder="Email" class="form-email form-control" id="form-email">
-=======
-	                        	<input type="text" name="form-email" placeholder="Email" class="form-email form-control" id="form-email">
->>>>>>> 0703ef97b324cbd901acb4f344f33141dac4646f:UserInterface/login&Register/index.html
 	                        </div>
 	                        
 	                        <button type="submit" name = "register" class="btn">Sign up</button>
