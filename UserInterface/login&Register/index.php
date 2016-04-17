@@ -53,16 +53,16 @@
                             <div class="form-bottom">
                                 
                                 <!-- here is the form for login submission. Grab input data from here-->
-			                    <form role="form" action="#" method="post" class="login-form">
+			                    <form role="form" action="connectivity.php" method="post" class="login-form">
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">Username</label>
-			                        	<input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username">
+			                        	<input type="text" name="user" placeholder="Username..." class="form-username form-control" id="form-username">
 			                        </div>
 			                        <div class="form-group">
 			                        	<label class="sr-only" for="form-password">Password</label>
-			                        	<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
+			                        	<input type="password" name="pass" placeholder="Password..." class="form-password form-control" id="form-password">
 			                        </div>
-			                        <button type="submit" class="btn">Sign in</button>
+			                        <button id = "button" type="submit" name = "submit" class="btn">Sign in</button>
 			                    </form>
                                 
 		                    </div>
@@ -102,30 +102,34 @@
         			<div class="modal-body">
                         
         				<!-- here is the form for registration. Grab input data here -->
-	                    <form role="form" action="" method="post" class="registration-form">
+	                    <form role="form" action="register.php" method="post" class="registration-form">
 	                    	<div class="form-group">
 	                    		<label class="sr-only" for="form-first-name">First name</label>
-	                        	<input type="text" name="form-first-name" placeholder="First name..." class="form-first-name form-control" id="form-first-name">
+	                        	<input type="text" name="first_name" placeholder="First name" class="form-first-name form-control" id="form-first-name">
 	                        </div>
 	                        <div class="form-group">
 	                        	<label class="sr-only" for="form-last-name">Last name</label>
-	                        	<input type="text" name="form-last-name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name">
+	                        	<input type="text" name="last_name" placeholder="Last name" class="form-last-name form-control" id="form-last-name">
+	                        </div>
+                            <div class="form-group">
+	                        	<label class="sr-only" for="form-user-name">User name</label>
+	                        	<input type="text" name="reg_user" placeholder="Username" class="form-user-name form-control" id="form-user-name">
 	                        </div>
                             <div class="form-group">
 			                        	<label class="sr-only" for="register-password">Password</label>
-			                        	<input type="password" name="register-password" placeholder="Password..." class="form-password form-control" id="register-password">
+			                        	<input type="password" name="reg_pass" placeholder="Password" class="form-password form-control" id="register-password">
 			                </div>
                             <div class="form-group">
 			                        	<label class="sr-only" for="confirm-password">ConfirmPassword</label>
-			                        	<input type="password" name="confirm-password" placeholder="confirm your password..." class="form-password form-control" id="confirm-password" onkeyup="checkPass(); return false;">
+			                        	<input type="password" name="confirm-password" placeholder="confirm your password" class="form-password form-control" id="confirm-password" onkeyup="checkPass(); return false;">
                                         <span id="confirmMessage" class="confirmMessage"></span>
 			                </div>
 	                        <div class="form-group">
 	                        	<label class="sr-only" for="form-email">Email</label>
-	                        	<input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
+	                        	<input type="text" name="email" placeholder="Email" class="form-email form-control" id="form-email">
 	                        </div>
 	                        
-	                        <button type="submit" class="btn">Sign up</button>
+	                        <button type="submit" name = "register" class="btn">Sign up</button>
 	                    </form>
 	                   
                         

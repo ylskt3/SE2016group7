@@ -21,6 +21,25 @@ create table user(
     primary key(user_id)
 );
 
+#test
+INSERT INTO user (username, password, first_name, last_name, title, area_of_interest, email, phone, address)
+VALUES ("test", "pass", "Yidong", "Sun", "Programer", "Computer Science", "1234Sun@mail.missouri.edu", "5733551234", "1234 College Ave, Columbia, Mo, 65202");
+
+DROP TABLE IF EXISTS userName;
+create table userName(
+    user_id int not null auto_increment,
+    userName varchar(50) not null,
+    pass varchar(50) not null,
+    email varchar(100) not null,
+    last_name varchar(50) not null,
+    first_name varchar(50) not null,
+    primary key(user_id)
+);
+INSERT INTO userName(userName, pass)
+VALUES("test", "pass");
+
+INSERT INTO userName (userName, pass, email, first_name, last_name) VALUES ("test", "pass", "123123@hotmail.com", "yidong", "sun");
+
 
 #PROFILE PAGE
 DROP TABLE IF EXISTS education;
