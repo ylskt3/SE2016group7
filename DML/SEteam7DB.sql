@@ -4,7 +4,8 @@ DROP TABLE IF EXISTS user;
 create table user(
     user_id int not null auto_increment,
     username varchar(50) not null,
-    password varchar(50) not null,
+    hashed_password varchar(50) not null,
+    salt varchar(50) not null,
     date_created TIMESTAMP not null,
     first_name varchar(50) not null,
     last_name varchar(50) not null,
@@ -54,9 +55,6 @@ create table education(
     description varchar(500),
     primary key(school, location)
 );
-
-
-
 
 #PROFILE PAGE
 DROP TABLE IF EXISTS experience;
@@ -136,9 +134,6 @@ create table invitations(
     primary key(user_id1, user_id2)
 );
 
-
-
-
 #JOB PAGE
 #RECRUITMENT PAGE
 DROP TABLE IF EXISTS job;
@@ -180,7 +175,6 @@ create table recent_viewers(
     viewer5 int references user(user_id),
     primary key(user_id)
 );
-
 
 #STATS PAGE
 #Trents Version
