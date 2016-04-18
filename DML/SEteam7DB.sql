@@ -51,9 +51,10 @@ create table education(
     gpa varchar(10),
     dates_attended varchar(50),
     field_of_study varchar(50),
+    degree varchar (50),
     activities_and_societies varchar(500),
     description varchar(500),
-    primary key(school, location)
+    primary key(user_id, school, location)
 );
 
 #PROFILE PAGE
@@ -65,7 +66,7 @@ create table experience(
     location varchar(50) not null,
     time_period varchar(20) not null,
     description varchar(500),
-    primary key(company_name, title)
+    primary key(user_id, company, title)
 );
 
 #PROFILE PAGE
@@ -77,7 +78,7 @@ create table volunteer(
     cause varchar(50) not null,
     dates varchar(20),
     description varchar(500),
-    primary key(organization, cause)
+    primary key(user_id, organization, role)
 );
 
 #PROFILE PAGE
@@ -150,7 +151,7 @@ create table job(
     employment_type varchar(50),
     application_deadline datetime not null,
     job_description varchar(500),
-    primary key(poster, job_title)
+    primary key(job_id)
 );
 
 #RECRUITMENT PAGE
@@ -159,7 +160,7 @@ DROP TABLE IF EXISTS applicants;
 create table applicants(
     job_id int references job(job_id),
     user_id int references user(user_id),
-    apply_date timestamp default current_timestamp,
+    application_date timestamp default current_timestamp,
     status varchar(25),
     primary key(job_id, user_id)
 );
@@ -187,7 +188,7 @@ create table number_of_views(
 );
 
 #My Version XD (whichever works boys!)
-DROP TABLE IF EXISTS profile_views;
+DROP TABLE IF EXISTS profile_views;d
 create table profile_views(
     user_id int references user(user_id),
     date timestamp default current_timestamp,
