@@ -4,8 +4,7 @@ DROP TABLE IF EXISTS user;
 create table user(
     user_id int not null auto_increment,
     username varchar(50) not null,
-    hashed_password varchar(50) not null,
-    salt varchar(50) not null,
+    password varchar(50) not null,
     date_created TIMESTAMP not null,
     first_name varchar(50) not null,
     last_name varchar(50) not null,
@@ -21,25 +20,6 @@ create table user(
     recruitment_email varchar(100),
     primary key(user_id)
 );
-
-#test
-INSERT INTO user (username, password, first_name, last_name, title, area_of_interest, email, phone, address)
-VALUES ("test", "pass", "Yidong", "Sun", "Programer", "Computer Science", "1234Sun@mail.missouri.edu", "5733551234", "1234 College Ave, Columbia, Mo, 65202");
-
-DROP TABLE IF EXISTS userName;
-create table userName(
-    user_id int not null auto_increment,
-    userName varchar(50) not null,
-    pass varchar(50) not null,
-    email varchar(100) not null,
-    last_name varchar(50) not null,
-    first_name varchar(50) not null,
-    primary key(user_id)
-);
-INSERT INTO userName(userName, pass)
-VALUES("test", "pass");
-
-INSERT INTO userName (userName, pass, email, first_name, last_name) VALUES ("test", "pass", "123123@hotmail.com", "yidong", "sun");
 
 
 #PROFILE PAGE
@@ -142,17 +122,34 @@ create table job(
     job_id int not null auto_increment,
     logo blob,
     poster int references user(user_id),
-    company varchar(50) references user(company),
+    company varchar(50),
     industry varchar(25),
-    location varchar(50) not null,
+    location varchar(50),
     experience_level varchar(50),
-    job_function varchar(30) not null,
-    job_title varchar(50) not null,
+    job_function varchar(30),
+    job_title varchar(50),
     employment_type varchar(50),
-    application_deadline datetime not null,
+    application_deadline datetime,
     job_description varchar(500),
+    salary int,
     primary key(job_id)
 );
+
+INSERT INTO job (company, job_title, job_description, salary) 
+VALUES ("Apple", "Programer", "Typing codes all day", "150000");
+
+INSERT INTO job (company, job_title, job_description, salary) 
+VALUES ("Blizzard", "Game tester", "Only one requirement: you must have played Blizzard's games.", "100000");
+
+INSERT INTO job (company, job_title, job_description, salary) 
+VALUES ("Google", "Translator", "At least knowing two languages", "120000");
+
+INSERT INTO job (company, job_title, job_description, salary) 
+VALUES ("Mizzou", "TA", "Grade student assignment", "20000");
+
+INSERT INTO job (company, job_title, job_description, salary) 
+VALUES ("Jingo", "Cooker", "Knowing how to cook Chinese food", "30000");
+
 
 #RECRUITMENT PAGE
 #STATS PAGE
