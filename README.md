@@ -2,7 +2,7 @@
 
 ###Authors
 -------
-Mateusz Haruza, Aren Wells, 
+Mateusz Haruza
 
 ###What’s the Project?
 -------------------
