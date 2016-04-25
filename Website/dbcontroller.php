@@ -55,6 +55,15 @@ class DBController {
 			return $result;
 		}
 	}
+
+	function selectQuery($query) {
+		$result = mysql_query($query);
+		if (!$result) {
+			die('Invalid query: ' . mysql_error());
+		} else {
+			return $result;
+		}
+	}
 	
 	function deleteQuery($query) {
 		$result = mysql_query($query);

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-    	// Every time we want to access $_SESSION, we have to call session_start()
+    	// Every time we want to access $_SESSION, we have to call session_start()a
     	if(!session_start()) {
     		header("Location: ../index.php");
     		exit;
@@ -13,18 +13,23 @@
     	}
 
       //connect to database
-      define('DB_HOST', 'us-cdbr-azure-central-a.cloudapp.net');
+      /*define('DB_HOST', 'us-cdbr-azure-central-a.cloudapp.net');
       define('DB_NAME', 'se2016group7');
       define('DB_USER', 'b84c6dec732d41');
       define('DB_PASSWORD','cc33ed14');
       $con = mysql_connect(DB_HOST,DB_USER,DB_PASSWORD) or die("Failed to connect to MySQL: " . mysql_error());
-      $db = mysql_select_db(DB_NAME,$con) or die("Failed to connect to MySQL: " . mysql_error());
+      $db = mysql_select_db(DB_NAME,$con) or die("Failed to connect to MySQL: " . mysql_error());*/
+
+      require_once("../dbcontroller.php");
+      $db_handle = new DBController();
 
       $target_user = $_SESSION['user'];
+
       $query = "SELECT * FROM user WHERE username = '$target_user'";
-      $result = mysql_query($query);
+      $result = $db_handle->selectQuery($query);
 
       if (!$result) die ("Database access failed: " . mysql_error());
+
       $row = mysql_fetch_array($result);
 
 ?>
@@ -34,24 +39,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home page</title>
-
     <!-- CSS -->
 
-        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" type="text/css" href="assets/semantic/semantic.min.css">
-        <link rel="stylesheet" href="assets/css/animate.css">
+            <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-theme.min.css">
+            <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+            <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+            <link rel="stylesheet" href="assets/css/style.css">
+            <link rel="stylesheet" type="text/css" href="assets/semantic/semantic.min.css">
+            <link rel="stylesheet" href="assets/css/animate.css">
 
-  <!-- Javascript -->
 
-  <script src="assets/js/jquery-1.12.3.min.js"></script>
-  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/js/jquery.backstretch.min.js"></script>
-  <script src="assets/semantic/semantic.min.js"></script>
-  <script src="assets/js/scripts.js"></script>
-  <script src="assets/js/wow.min.js"></script>
+      <!-- Javascript -->
+
+      <script src="assets/js/jquery-1.12.3.min.js"></script>
+      <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+      <script src="assets/js/jquery.backstretch.min.js"></script>
+      <script src="assets/semantic/semantic.min.js"></script>
+      <script src="assets/js/wow.min.js"></script>
+      <script src="assets/js/scripts.js"></script>
+
     <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
         <![endif]-->
@@ -82,13 +88,13 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="edit_your_profile.php">Edit Portfolio</a></li>
+                <li><a href="../edition/edit_your_profile.php">Edit Portfolio</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="business_creation.php">Create business</a></li>
+                <li><a href="../edition/business_creation.php">Create business</a></li>
               </ul>
             </li>
-            <li><a href="connections.php" data-toggle="tooltip" data-placement="bottom" title="Connect your friends">Connection</a></li>
-            <li><a href="searh_job.php" data-toggle="tooltip" data-placement="bottom" title="Search for jobs">Search Jobs</a></li>
+            <li><a href="../edition/connections.php" data-toggle="tooltip" data-placement="bottom" title="Connect your friends">Connection</a></li>
+            <li><a href="search_job.php" data-toggle="tooltip" data-placement="bottom" title="Search for jobs">Search Jobs</a></li>
             <li><a href="../contact/contact_us.php" data-toggle="tooltip" data-placement="bottom" title="contact us">Contact us</a></li>
 
           </ul>

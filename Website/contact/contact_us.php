@@ -62,13 +62,13 @@ if (!$loggedIn) {
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="caret"></span></a>
                           <ul class="dropdown-menu">
-                            <li><a href="../home/edit_your_profile.php">Edit Portfolio</a></li>
+                            <li><a href="../edition/edit_your_profile.php">Edit Portfolio</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="../home/business_creation.php">Create business</a></li>
+                            <li><a href="../edition/business_creation.php">Create business</a></li>
                           </ul>
                         </li>
-                        <li><a href="../home/connections.php" data-toggle="tooltip" data-placement="bottom" title="Connect your friends">Connection</a></li>
-                        <li><a href="../home/searh_job.php" data-toggle="tooltip" data-placement="bottom" title="Search for jobs">Search Jobs</a></li>
+                        <li><a href="../edition/connections.php" data-toggle="tooltip" data-placement="bottom" title="Connect your friends">Connection</a></li>
+                        <li><a href="../home/search_job.php" data-toggle="tooltip" data-placement="bottom" title="Search for jobs">Search Jobs</a></li>
                         <li><a href="contact_us.php" data-toggle="tooltip" data-placement="bottom" title="contact us" >Contact us</a></li>
 
                       </ul>

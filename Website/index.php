@@ -11,6 +11,9 @@ define('DB_PASSWORD','cc33ed14');
 if(isset($_POST['submit'])){
     $_SESSION['login'] = false;
 
+    //require_once("dbcontroller.php");
+    //$db_handle = new DBController();
+
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME) or die("Connect Error ". mysqli_error($link));
     $sql = "SELECT password FROM user where username = ?";
     $_SESSION['user'] = $_POST['user'];

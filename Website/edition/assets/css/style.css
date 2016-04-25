@@ -1,0 +1,18 @@
+#bodyID {
+          font-family: 'Roboto', sans-serif;
+          font-size: 16px;
+          font-weight: 300;
+          color: #888;
+          line-height: 30px;
+          text-align: center;
+          min-height: 2000px;
+          padding-top: 60px;
+     }
+
+.dropdown:hover .dropdown-menu {
+
+          display: block;
+          
+}
+
+.form-container { width: 100%; min-height: 100%; padding: 0 0 90px 0; background: #444; }
