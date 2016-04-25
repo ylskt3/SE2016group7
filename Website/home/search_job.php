@@ -28,15 +28,29 @@ if(isset($_POST['searchBtn']))
 {
   if(empty($_POST['search_param']))
   {
-    $query = "SELECT * FROM job";
+    $user_input = $_POST['user_input'];
+
+    $query = "SELECT * FROM job WHERE company LIKE '%$user_input%' OR job_title LIKE '%$user_input%' OR job_description LIKE '%$user_input%'";  
   }
   else
   {
     $search_param = $_POST['search_param'];
     $user_input = $_POST['user_input'];
 
-    $query = "SELECT * FROM job WHERE $search_param LIKE '$user_input'";
+    $query = "SELECT * FROM job WHERE $search_param LIKE '%$user_input%'";
   }
+
+  $result = $db_handle->selectQuery($query);
+
+  if (!$result)
+  {
+    echo "NOT RESULTS FOUND";
+  }
+}
+
+if(isset($_POST['showAlljobs']))
+{
+  $query = "SELECT * FROM job";
 
   $result = $db_handle->selectQuery($query);
 
@@ -130,7 +144,7 @@ if(isset($_POST['searchBtn']))
                             <ul class="dropdown-menu" role="menu">
                               <li><a href="#company">Company</a></li>
                               <li><a href="#job_title">Job title</a></li>
-
+                              <li><a href="#all">Show all jobs</a></li>
                             </ul>
                         </div>
                         <input type="hidden" name="search_param" value="" id="search_param">
@@ -138,13 +152,18 @@ if(isset($_POST['searchBtn']))
                         <span class="input-group-btn wow bounceInRight">
                             <button class="btn btn-default" name="searchBtn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                         </span>
+                        
+                        <span class="input-group-btn wow bounceInRight">
+                            <button class="btn btn-default" name="showAlljobs" type="submit">Show all</button>
+                        </span>
                     </div>
                     </form>
                 </div>
             </div>
                 <hr>
             </div>
-
+          <br>
+           <br>
             <div class="container">
                <h1 class="wow rotateIn">Search results</h1>
                <table class="table table-hover">

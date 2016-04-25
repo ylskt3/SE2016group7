@@ -22,13 +22,12 @@ if(isset($_POST['updateInfo']))
 
   if(!empty($result))
   {
-    echo $query;
-    //header("Location: home/search_job.php");
+    header("Location: ../home/search_job.php");
   }
   else
   {
     header("Location: business_creation.php");
-    echo "Insert falier";  
+    echo "Insert falier";
   }
 }
 
@@ -113,7 +112,7 @@ if(isset($_POST['updateInfo']))
                      <hr>
                       <h2>Create your jobs</h2>
                       <hr>
-                      <form action="../home/search_job.php" method="post">
+                      <form action="" method="post">
                       <div class="row">
                           <div class="col-md-5">
                               <div class="form-group">
