@@ -2,7 +2,18 @@
 
 ###Authors
 -------
-Mateusz Haruza
+* Mateusz Haruza
+* Aren Wells
+
+###Downloading the Project
+-------------------------
+To download and make changes to project:
+ 1. Make a pull request.
+ 2. Make a new branch of the project.
+ 3. Make changes locally via GitHub desktop or on the web.
+ 4. Merge the branch with changes back to the project.
+ 5. Wait for the branch to be committed.
+* Project is located at: https://github.com/ylskt3/SE2016group7
 
 ###What’s the Project?
 -------------------
