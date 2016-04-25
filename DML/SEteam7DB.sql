@@ -129,7 +129,7 @@ create table job(
     job_function varchar(30),
     job_title varchar(50),
     employment_type varchar(50),
-    application_deadline datetime,
+    application_deadline varchar(30),
     job_description varchar(500),
     salary int,
     primary key(job_id)

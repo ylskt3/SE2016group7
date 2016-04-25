@@ -10,6 +10,28 @@ if (!$loggedIn) {
   header("Location: ../index.php");
   exit;
 }
+
+if(isset($_POST['updateInfo']))
+{
+  require_once("../dbcontroller.php");
+  $db_handle = new DBController();
+  $query = "INSERT INTO job (company, industry, location, experience_level, job_function, job_title, employment_type, application_deadline, job_description, salary) VALUES
+  ('" . $_POST["jobCompany"] . "', '" . $_POST["jobIndustry"] . "', '" . $_POST["companyLoc"] . "', '" . $_POST["experienceLevel"] . "', '" . $_POST["jobFunction"] . "', '" . $_POST["jobTitle"] . "', '" . $_POST["empType"] . "', '" . $_POST["appDeadline"] . "', '" . $_POST["jobDes"] . "', '" . $_POST["jobSalary"] . "')";
+
+  $result = $db_handle->insertQuery($query);
+
+  if(!empty($result))
+  {
+    echo $query;
+    //header("Location: home/search_job.php");
+  }
+  else
+  {
+    header("Location: business_creation.php");
+    echo "Insert falier";  
+  }
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,20 +43,24 @@ if (!$loggedIn) {
 
     <!-- CSS -->
 
-        <!-- CSS -->
-
         <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
+        <link rel='stylesheet' href="assets/css/material-kit.css">
 
 
   <!-- Javascript -->
 
-  <script src="assets/js/jquery-1.12.3.min.js"></script>
+ <script src="assets/js/jquery-1.12.3.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
   <script src="assets/js/jquery.backstretch.min.js"></script>
   <script src="assets/js/scripts.js"></script>
+<!-- datepicker -->
+  <script src="assets/js/material.min.js"></script>
+  <script src="assets/js/material-kit.js"></script>
+  <script src="assets/js/bootstrap-datepicker.js"></script>
+
     <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
         <![endif]-->
@@ -82,11 +108,95 @@ if (!$loggedIn) {
     </nav>
 
 
-            <div class="container">
+        <div class="container">
+             <div class="content">
+                     <hr>
+                      <h2>Create your jobs</h2>
+                      <hr>
+                      <form action="../home/search_job.php" method="post">
+                      <div class="row">
+                          <div class="col-md-5">
+                              <div class="form-group">
+                                  <label>Company Name</label>
+                                  <input type="text" class="form-control" placeholder="" name="jobCompany" required>
+                              </div>
+                          </div>
+                          <div class="col-md-5">
+                              <div class="form-group">
+                                  <label>Industry </label>
+                                  <input type="text" class="form-control"  name="jobIndustry" required>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Company Location </label>
+                                <input type="text" class="form-control"  name="companyLoc" required>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                  <label>Job title</label>
+                                  <input type="text" class="form-control" placeholder="" name="jobTitle" required>
+                              </div>
+                          </div>
+                          <div class="col-md-3">
+                              <div class="form-group">
+                                  <label>Job function</label>
+                                  <input type="text" class="form-control" placeholder="" name="jobFunction" required>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                  <label>Experience level</label>
+                                  <input type="text" class="form-control" placeholder="" name="experienceLevel" required>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Application Deadline </label>
+                                <input type="text" class="datepicker form-control"  name="appDeadline" placeholder="month / day / year"required>
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                              <div class="form-group">
+                                  <label>Salary</label>
+                                  <input type="number" class="form-control" placeholder="" name="jobSalary" required>
+                              </div>
+                          </div>
 
-            <h1>This is a business-creating page</h1>
+                          <div class="col-md-3">
+                                    <div class="form-group">
+                                       <label for="employmentID">Employment type</lable>
+                                       <select class="form-control" name="empType" id="employmentID">
+                                        <option selected="true" style="display:none;"></option>
+                                        <option>Internship </option>
+                                        <option>Part-time </option>
+                                        <option>Full-time </option>
+                                       </select>
+                                    </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="form-group">
+                                  <label>Job Description</label>
+                                  <textarea rows="5" class="form-control" placeholder="Here can be your description" name="jobDes"></textarea>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                         <button type="submit" name="updateInfo" class="btn btn-info btn-fill pull-right">Update Profile</button>
+                      </div>
+                    </form>
 
-            </div>
+             </div>
+        </div>
 
 
 
