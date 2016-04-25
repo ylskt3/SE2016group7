@@ -148,7 +148,7 @@ INSERT INTO job (company, job_title, job_description, salary)
 VALUES ("Mizzou", "TA", "Grade student assignment", "20000");
 
 INSERT INTO job (company, job_title, job_description, salary) 
-VALUES ("Jingo", "Cooker", "Knowing how to cook Chinese food", "30000");
+VALUES ("Jingo", "Cook", "Knowing how to cook Chinese food", "30000");
 
 
 #RECRUITMENT PAGE
