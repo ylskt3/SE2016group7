@@ -91,8 +91,8 @@ if(isset($_POST['submit'])){
                         <div class="col-sm-6 col-sm-offset-3 form-box wow slideInRight">
                         	<div class="form-top">
                         		<div class="form-top-left">
-                        			<h3>Login to our site</h3>
-                            		<p>Enter your username and password to log on:</p>
+                        			<h3>Hello! Please login.</h3>
+                            		<p>Enter your username and password:</p>
                         		</div>
                         		<div class="form-top-right">
                         			<i class="fa fa-sign-in"></i>
