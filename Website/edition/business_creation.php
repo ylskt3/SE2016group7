@@ -190,7 +190,7 @@ if(isset($_POST['updateInfo']))
                           </div>
                       </div>
                       <div class="row">
-                         <button type="submit" name="updateInfo" class="btn btn-info btn-fill pull-right">Update Profile</button>
+                         <button type="submit" name="updateInfo" class="btn btn-info btn-fill pull-right">Create the job</button>
                       </div>
                     </form>
 

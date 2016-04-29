@@ -150,7 +150,7 @@
                             <div class="ui segment">Address 1: <?php echo $row['address']?></div>
                     </div>
                      <div class="column wow rotateInUpRight">
-                            <div class="ui segment">Address 2: <?php echo ""?></div>
+                            <div class="ui segment">City: <?php echo $row['city']?></div>
                     </div>
                 </div>
            </div>

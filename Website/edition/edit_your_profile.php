@@ -11,21 +11,32 @@ if (!$loggedIn) {
   exit;
 }
 
+require_once("../dbcontroller.php");
+$db_handle = new DBController();
+
+$title = $_POST['title'];
+$interest = $_POST['interest'];
+$email = $_POST['email'];
+$phone = $_POST['phone'];
+$address = $_POST['address'];
+$city = $_POST['city'];
+$state = $_POST['states'];
+$user = $_SESSION['user'];
+//$country= $_POST['country'];
+//$zipcode = $_POST['zipcode'];
+
+
+$query2 = "SELECT * FROM user WHERE username = '$user'";
+$result2 = $db_handle->selectQuery($query2);
+
+if (!$result2) die ("Database access failed: " . mysql_error());
+
+$row = mysql_fetch_array($result2);
+
+
+
 if(isset($_POST['updateInfo']))
 {
-  require_once("../dbcontroller.php");
-  $db_handle = new DBController();
-
-  $title = $_POST['title'];
-  $interest = $_POST['interest'];
-  $email = $_POST['email'];
-  $phone = $_POST['phone'];
-  $address = $_POST['address'];
-  $city = $_POST['city'];
-  $state = $_POST['states'];
-  $user = $_SESSION['user'];
-  //$country= $_POST['country'];
-  //$zipcode = $_POST['zipcode'];
 
   $query = "UPDATE user
   SET title = '$title', area_of_interest = '$interest', email = '$email', phone = '$phone', address = '$address', city = '$city', state = '$state'
@@ -129,14 +140,14 @@ if(isset($_POST['updateInfo']))
                       <div class="row">
                           <div class="col-md-4">
                               <div class="form-group">
-                                  <label>First Name</label>
-                                  <input type="text" class="form-control"  name="fname" value="Mike" disabled>
+                                  <label>First name</label>
+                                  <input type="text" class="form-control"  name="fname" value="<?php echo $row['first_name']?>" disabled>
                               </div>
                           </div>
                           <div class="col-md-4">
                               <div class="form-group">
-                                  <label>Last Name</label>
-                                  <input type="text" class="form-control"  name="lname" value="Andrew" disabled>
+                                  <label>Last name</label>
+                                  <input type="text" class="form-control"  name="lname" value="<?php echo $row['last_name']?>" disabled>
                               </div>
                           </div>
                           <!-- put a select choice here -->

@@ -144,7 +144,6 @@ if(isset($_POST['showAlljobs']))
                             <ul class="dropdown-menu" role="menu">
                               <li><a href="#company">Company</a></li>
                               <li><a href="#job_title">Job title</a></li>
-                              <li><a href="#all">Show all jobs</a></li>
                             </ul>
                         </div>
                         <input type="hidden" name="search_param" value="" id="search_param">
