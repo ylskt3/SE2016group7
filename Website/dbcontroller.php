@@ -1,14 +1,14 @@
 <?php
 $host = 'us-cdbr-azure-central-a.cloudapp.net';
-$user = 'b84c6dec732d41';
-$password = 'cc33ed14';
+$user = 'b35816f4d91dbd';
+$password = 'bcafd0d0';
 $database = 'se2016group7';
 
 
 class DBController {
 	private $host = "us-cdbr-azure-central-a.cloudapp.net";
-	private $user = "b84c6dec732d41";
-	private $password = "cc33ed14";
+	private $user = "b35816f4d91dbd";
+	private $password = "bcafd0d0";
 	private $database = "se2016group7";
 
 

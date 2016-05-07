@@ -3,18 +3,18 @@
  //start the session.
  session_start();
 
-define('DB_HOST', 'us-cdbr-azure-central-a.cloudapp.net');
+/*define('DB_HOST', 'us-cdbr-azure-central-a.cloudapp.net');
 define('DB_NAME', 'se2016group7');
 define('DB_USER', 'b84c6dec732d41');
-define('DB_PASSWORD','cc33ed14');
+define('DB_PASSWORD','cc33ed14');*/
 
 if(isset($_POST['submit'])){
     $_SESSION['login'] = false;
 
-    //require_once("dbcontroller.php");
-    //$db_handle = new DBController();
+    require_once("dbcontroller.php");
+    $db_handle = new DBController();
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME) or die("Connect Error ". mysqli_error($link));
+    $link = mysqli_connect($host, $user, $password, $database) or die("Connect Error ". mysqli_error($link));
     $sql = "SELECT password FROM user where username = ?";
     $_SESSION['user'] = $_POST['user'];
     if($stmt = mysqli_prepare($link, $sql)){

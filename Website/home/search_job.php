@@ -11,9 +11,14 @@ if (!$loggedIn) {
   exit;
 }
   //connect to database
-
+include("../kdnuggets-php-mysql/fusioncharts/fusioncharts.php");
 require_once("../dbcontroller.php");
 $db_handle = new DBController();
+
+$dbhandle = new mysqli($host, $user, $password, $database);
+if ($dbhandle->connect_error) {
+  exit("There was an error with your connection: ".$dbhandle->connect_error);
+}
 
 /*define('DB_HOST', 'us-cdbr-azure-central-a.cloudapp.net');
 define('DB_NAME', 'se2016group7');
@@ -60,12 +65,11 @@ if(isset($_POST['showAlljobs']))
   }
 }
 
-
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-
+    <script src="../kdnuggets-php-mysql/fusioncharts/js/fusioncharts.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -163,6 +167,85 @@ if(isset($_POST['showAlljobs']))
             </div>
           <br>
            <br>
+            <?php
+  
+
+  $strQuery = "SELECT salary, company FROM job;";
+
+  $result1 = $dbhandle->query($strQuery) or exit("Error code ({$dbhandle->errno}): {$dbhandle->error}");
+  if ($result1) {
+          
+  $arrData = array(
+      "chart" => array(
+          "caption"=> "All jobs' payment",
+          "subCaption"=> "",
+          "captionFontColor"=> "#000000",
+          "captionFontBold"=> "1",
+          "captionFontSize"=> "27",
+
+          // x and y axes configuration options
+          "xAxisName"=> "Company Name",
+          "xAxisNameFontSize"=> "18",
+          "xAxisNameFontBold"=> "0",
+          "yAxisName"=> "Salary (in USD)",
+          "yAxisNameFontSize"=> "18",
+          "yAxisNameFontBold"=> "0",
+
+          // general chart configuration options
+          "baseFont"=> "Open Sans",
+          "paletteColors"=> "#06A69E",
+          "plotFillAlpha"=> "90",
+          "usePlotGradientColor"=> "0",
+          "numberPrefix"=> "$",
+          "bgcolor"=> "#ffffff",
+          "bgalpha"=> "95",
+          "canvasbgalpha"=> "0",
+          "basefontcolor"=> "#000000",
+          "showAlternateHGridColor"=> "0",
+          "divlinealpha"=> "50",
+          "divlinedashed"=> "0",
+          "rotateyaxisname"=> "1",
+          "canvasbordercolor"=> "#ffffff",
+          "canvasborderthickness"=> ".3",
+          "canvasborderalpha"=> "100",
+          "showValues"=> "0",
+          "plotSpacePercent"=> "8",
+          "labelFontSize"=> "15",
+          "outCnvBaseFontSize"=> "13",
+          "showLimits"=> "0",
+
+          // tooltip configuration options
+          "toolTipBgColor"=> "#f5f5f5",
+          "toolTipPadding"=> "12",
+          "toolTipBorderRadius"=> "3",
+          "toolTipBorderThickness"=> "1",
+          "toolTipBorderColor"=> "#ccc",
+          "toolTipBgAlpha"=> "70"
+          )
+      );
+
+          $arrData["data"] = array();
+
+  
+          while($row1 = mysqli_fetch_array($result1)) {
+          array_push($arrData["data"], array(
+          "label" => $row1["company"],
+          "value" => $row1["salary"]
+          )
+        );
+          } 
+  
+            $jsonEncodedData = json_encode($arrData);
+      
+              $columnChart = new FusionCharts("column2d", "expenseChart" , "100%", "500", "column-chart", "json", $jsonEncodedData);
+             $columnChart->render();
+       
+             $dbhandle->close();
+           
+         }
+
+?>
+            <div id="column-chart"></div>
             <div class="container">
                <h1 class="wow rotateIn">Search results</h1>
                <table class="table table-hover">
@@ -171,7 +254,7 @@ if(isset($_POST['showAlljobs']))
                             <th>Company</th>
                             <th>Job title</th>
                             <th>description</th>
-                            <th>Salary</th>
+                            <th>Application deadline</th>
                             <th></th>
                           </tr>
                     </thead>
@@ -185,7 +268,7 @@ if(isset($_POST['showAlljobs']))
                                    echo "<td>" . $row['company'] . "</td>";
                                    echo "<td>" . $row['job_title'] . "</td>";
                                    echo "<td>" . $row['job_description'] . "</td>";
-                                   echo "<td>" . "$".$row['salary'] . "</td>";
+                                   echo "<td>" . $row['application_deadline'] . "</td>";
                                    echo "<td><input class='btn btn-default' type='submit' name='view' value='View'></td>";
                                    echo "</tr>";
                                    $i++;
