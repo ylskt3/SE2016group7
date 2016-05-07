@@ -184,7 +184,7 @@ if(isset($_POST['showAlljobs']))
           "captionFontSize"=> "27",
 
           // x and y axes configuration options
-          "xAxisName"=> "Company Name",
+          "xAxisName"=> "Companies",
           "xAxisNameFontSize"=> "18",
           "xAxisNameFontBold"=> "0",
           "yAxisName"=> "Salary (in USD)",
@@ -210,7 +210,7 @@ if(isset($_POST['showAlljobs']))
           "canvasborderalpha"=> "100",
           "showValues"=> "0",
           "plotSpacePercent"=> "8",
-          "labelFontSize"=> "15",
+          "labelFontSize"=> "0",
           "outCnvBaseFontSize"=> "13",
           "showLimits"=> "0",
 
@@ -245,9 +245,13 @@ if(isset($_POST['showAlljobs']))
          }
 
 ?>
-            <div id="column-chart"></div>
+            <center><div id="column-chart"></div></center>
+            <br>
+           <br><br>
+           <br>
             <div class="container">
-               <h1 class="wow rotateIn">Search results</h1>
+               <h1 class="wow rotateIn">Search results</h1><br>
+           <br>
                <table class="table table-hover">
                     <thead class="wow fadeInDown">
                           <tr>

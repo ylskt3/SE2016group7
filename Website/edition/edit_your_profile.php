@@ -14,17 +14,32 @@ if (!$loggedIn) {
 require_once("../dbcontroller.php");
 $db_handle = new DBController();
 
-$title = $_POST['title'];
+/*$title = $_POST['title'];
 $interest = $_POST['interest'];
 $email = $_POST['email'];
 $phone = $_POST['phone'];
 $address = $_POST['address'];
 $city = $_POST['city'];
 $state = $_POST['states'];
-$user = $_SESSION['user'];
-//$country= $_POST['country'];
-//$zipcode = $_POST['zipcode'];
+$country= $_POST['country'];
+$zipcode = $_POST['zipcode'];*/
 
+$user = $_SESSION['user'];
+
+$query = "UPDATE user SET";
+$comma = " ";
+$whitelist = array(
+    'picture blob',
+    'title',
+    'area_of_interest',
+    'email',
+    'phone',
+    'address',
+    'company',
+    'city',
+    'state'
+    // ...etc
+);
 
 $query2 = "SELECT * FROM user WHERE username = '$user'";
 $result2 = $db_handle->selectQuery($query2);
@@ -38,9 +53,19 @@ $row = mysql_fetch_array($result2);
 if(isset($_POST['updateInfo']))
 {
 
-  $query = "UPDATE user
+  foreach($_POST as $key => $val) {
+    if( ! empty($val) && in_array($key, $whitelist)) {
+        $query .= $comma . $key . " = '" . mysql_real_escape_string(trim($val)) . "'";
+        $comma = ", ";
+    }
+  }
+
+  //echo $query;
+  //$sql = mysql_query($query);
+
+  /*$query = "UPDATE user
   SET title = '$title', area_of_interest = '$interest', email = '$email', phone = '$phone', address = '$address', city = '$city', state = '$state'
-  WHERE username = '$user'";
+  WHERE username = '$user'";*/
 
   $result = $db_handle->updateQuery($query);
 
@@ -169,13 +194,13 @@ if(isset($_POST['updateInfo']))
                           <div class="col-md-5">
                               <div class="form-group">
                                   <label>Title</label>
-                                  <input type="text" class="form-control"  name="title" required>
+                                  <input type="text" class="form-control"  name="title">
                               </div>
                           </div>
                           <div class="col-md-5">
                               <div class="form-group">
                                   <label>Interests</label>
-                                  <input type="text" class="form-control"  name="interest" required>
+                                  <input type="text" class="form-control"  name="area_of_interest">
                               </div>
                           </div>
                       </div>
@@ -184,19 +209,19 @@ if(isset($_POST['updateInfo']))
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Email address</label>
-                                <input type="email" class="form-control"  name="email" required>
+                                <input type="email" class="form-control"  name="email">
                             </div>
                         </div>
                         <div class="col-md-1">
                             <div class="form-group">
                                 <label>Country#</label>
-                                <input type="text" class="form-control" name="countryNum" placeholder="+1" required>
+                                <input type="text" class="form-control" name="countryNum" placeholder="+1">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Phone</label>
-                                <input type="number" class="form-control" name="phone" required>
+                                <input type="number" class="form-control" name="phone">
                             </div>
                         </div>
 
@@ -207,7 +232,7 @@ if(isset($_POST['updateInfo']))
                           <div class="col-md-12">
                               <div class="form-group">
                                   <label>Address</label>
-                                  <input type="text" class="form-control" placeholder="Home Address" name="address" required>
+                                  <input type="text" class="form-control" placeholder="Home Address" name="address">
                               </div>
                           </div>
                       </div>
@@ -216,25 +241,25 @@ if(isset($_POST['updateInfo']))
                           <div class="col-md-2">
                               <div class="form-group">
                                   <label>City</label>
-                                  <input type="text" class="form-control"  name="city" required>
+                                  <input type="text" class="form-control"  name="city">
                               </div>
                           </div>
                           <div class="col-md-2">
                               <div class="form-group">
                                   <label>State/Province</label>
-                                  <input type="text" class="form-control"  name="states" required>
+                                  <input type="text" class="form-control"  name="state">
                               </div>
                           </div>
                           <div class="col-md-2">
                               <div class="form-group">
                                   <label>Country</label>
-                                  <input type="text" class="form-control"  name="country" required>
+                                  <input type="text" class="form-control"  name="country">
                               </div>
                           </div>
                           <div class="col-md-2">
                               <div class="form-group">
                                   <label>Postal Code</label>
-                                  <input type="number" class="form-control"  name="zipcode" required>
+                                  <input type="number" class="form-control"  name="zipcode">
                               </div>
                           </div>
                       </div>
@@ -251,19 +276,19 @@ if(isset($_POST['updateInfo']))
                           <div class="col-md-5">
                               <div class="form-group">
                                   <label>School</label>
-                                  <input type="text" class="form-control" placeholder="" name="school" required>
+                                  <input type="text" class="form-control" placeholder="" name="school">
                               </div>
                           </div>
                           <div class="col-md-4">
                               <div class="form-group">
                                   <label>Major </label>
-                                  <input type="text" class="form-control"  name="major" required>
+                                  <input type="text" class="form-control"  name="major">
                               </div>
                           </div>
                           <div class="col-md-1">
                               <div class="form-group">
                                   <label>GPA </label>
-                                  <input type="text" class="form-control"  name="gpa" required>
+                                  <input type="text" class="form-control"  name="gpa">
                               </div>
                           </div>
                       </div>
@@ -272,20 +297,20 @@ if(isset($_POST['updateInfo']))
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Attended since </label>
-                                <input type="text" class="datepicker form-control"  name="attendTime" placeholder="month / day / year"required>
+                                <input type="text" class="datepicker form-control"  name="attendTime" placeholder="month / day / year">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Graduation date </label>
-                                <input type="text" class="datepicker form-control"  name="gradDate" placeholder="month / day / year" required>
+                                <input type="text" class="datepicker form-control"  name="gradDate" placeholder="month / day / year">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                               <!--
                                 <label>Degree </label>
-                                <input type="text" class="form-control"  name="degree" placeholder="bachelor?" required>
+                                <input type="text" class="form-control"  name="degree" placeholder="bachelor?">
                               -->
                               <label for="degreeID">Degree</lable>
                               <select class="form-control" id="degreeID">
@@ -301,7 +326,7 @@ if(isset($_POST['updateInfo']))
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>University Location </label>
-                                <input type="text" class="form-control"  name="universityLoc" required>
+                                <input type="text" class="form-control"  name="universityLoc">
                             </div>
                         </div>
                       </div>
@@ -326,25 +351,25 @@ if(isset($_POST['updateInfo']))
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Company</label>
-                                <input type="text" class="form-control" placeholder="" name="company" required>
+                                <input type="text" class="form-control" placeholder="" name="company">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>title </label>
-                                <input type="text" class="form-control"  name="title" required>
+                                <input type="text" class="form-control"  name="title">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Time begin </label>
-                                <input type="text" class="datepicker form-control"  name="time_begin" placeholder="month / day / year" required>
+                                <input type="text" class="datepicker form-control"  name="time_begin" placeholder="month / day / year">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Time end </label>
-                                <input type="text" class="datepicker form-control"  name="time_end" placeholder="month / day / year" required>
+                                <input type="text" class="datepicker form-control"  name="time_end" placeholder="month / day / year">
                             </div>
                         </div>
                       </div>
@@ -352,7 +377,7 @@ if(isset($_POST['updateInfo']))
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Company location </label>
-                                <input type="text" class="form-control"  name="companyLoc" required>
+                                <input type="text" class="form-control"  name="companyLoc">
                             </div>
                         </div>
                       </div>
@@ -377,25 +402,25 @@ if(isset($_POST['updateInfo']))
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Organization</label>
-                                <input type="text" class="form-control" placeholder="" name="organization" required>
+                                <input type="text" class="form-control" placeholder="" name="organization">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Role </label>
-                                <input type="text" class="form-control"  name="role" required>
+                                <input type="text" class="form-control"  name="role">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Date begin </label>
-                                <input type="text" class="datepicker form-control"  name="volunteerBegin" placeholder="month / day / year" required>
+                                <input type="text" class="datepicker form-control"  name="volunteerBegin" placeholder="month / day / year">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Date end </label>
-                                <input type="text" class="datepicker form-control"  name="volunteerEnd" placeholder="month / day / year" required>
+                                <input type="text" class="datepicker form-control"  name="volunteerEnd" placeholder="month / day / year">
                             </div>
                         </div>
                       </div>
