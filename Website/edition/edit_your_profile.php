@@ -135,7 +135,6 @@ if(isset($_POST['updateEdu']))
 
       }
       $query3 .= " WHERE user_id = '$userId'";
-      echo $query3;
   }
   else
   {
