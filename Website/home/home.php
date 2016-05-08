@@ -32,6 +32,33 @@
 
       $row = mysql_fetch_array($result);
 
+      $userID = $row['user_id'];
+
+      $query2 = "SELECT * FROM education WHERE user_id = '$userID'";
+
+      $result2 = $db_handle->selectQuery($query2);
+
+      if (!$result2) die ("Database access failed: " . mysql_error());
+
+      $row2 = mysql_fetch_array($result2);
+
+      $query3 = "SELECT * FROM experience WHERE user_id = '$userID'";
+
+      $result3 = $db_handle->selectQuery($query3);
+
+      if (!$result3) die ("Database access failed: " . mysql_error());
+
+      $row3 = mysql_fetch_array($result3);
+
+      $query4 = "SELECT * FROM volunteer WHERE user_id = '$userID'";
+
+      $result4 = $db_handle->selectQuery($query4);
+
+      if (!$result4) die ("Database access failed: " . mysql_error());
+
+      $row4 = mysql_fetch_array($result4);
+
+
 ?>
 <html lang="en">
 <head>
@@ -142,7 +169,7 @@
                        <div class="ui segment"><?php echo $row['email']?></div>
                    </div>
                    <div class="column wow fadeInRightBig">
-                       <div class="ui segment">University: <?php echo ""?></div>
+                       <div class="ui segment">School: <?php echo $row2['school']?></div>
                    </div>
                 </div>
                 <div class="two column row">
@@ -170,7 +197,10 @@
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                   <div class="panel-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    My gpa is <?php echo $row2['gpa']?> <br> 
+                    My major is <?php echo $row2['major']?> <br>
+                    My school is at <?php echo $row2['edu_location']?>, I attended on <?php echo $row2['dates_attended']?>, graduated on <?php echo $row2['dates_graduated']?>. <br>
+                    <?php echo $row2['edu_description']?>
                   </div>
                 </div>
               </div>
@@ -184,7 +214,11 @@
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                   <div class="panel-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    I worked on:  <?php echo $row3['exp_company']?>, <?php echo $row3['exp_location']?><br>
+                    My position was <?php echo $row3['exp_title']?><br>
+                    From <?php echo $row3['exp_time_begin']?> to <?php echo $row3['exp_time_end']?>.<br>
+                    My job was doing <?php echo $row3['exp_description']?>
+
                   </div>
                 </div>
               </div>
@@ -198,7 +232,12 @@
                 </div>
                 <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                   <div class="panel-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    I volunteered on:  <?php echo $row4['organization']?><br>
+                    My motivation was <?php echo $row4['cause']?><br>
+                    My role was <?php echo $row4['role']?><br>
+                    From <?php echo $row4['vol_start_date']?> to <?php echo $row4['vol_end_date']?>.<br>
+                    My job was doing <?php echo $row4['vol_description']?>
+                    
                   </div>
                 </div>
               </div>

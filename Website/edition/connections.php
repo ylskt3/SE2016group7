@@ -87,10 +87,7 @@ if (!$loggedIn) {
         <div class="container">
 
         <h1>This is a connection page</h1>
-
-
         
-
         </div>
 
 

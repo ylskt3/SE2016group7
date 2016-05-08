@@ -14,14 +14,10 @@ $(document).ready(function(){
        */
        new WOW().init();
 
-    /* datepicker
-    if($('.datepicker').length != 0){
-     $('.datepicker').datepicker({
-          weekStart:1,
-          color: '{color}'
-      });
-    }
-  */
+
+
+
+
 
 });
 

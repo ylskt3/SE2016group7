@@ -11,7 +11,7 @@
   {
 		session_start();
 		$_SESSION['user'] = $_POST["reg_user"];
-    header("Location: home/home.php");
+    header("Location: edition/edit_your_profile.php");
     unset($_POST);
   }
   else

@@ -35,7 +35,7 @@ if(isset($_POST['searchBtn']))
   {
     $user_input = $_POST['user_input'];
 
-    $query = "SELECT * FROM job WHERE company LIKE '%$user_input%' OR job_title LIKE '%$user_input%' OR job_description LIKE '%$user_input%'";  
+    $query = "SELECT * FROM job WHERE company LIKE '%$user_input%' OR job_title LIKE '%$user_input%' OR job_description LIKE '%$user_input%'";
   }
   else
   {
@@ -95,6 +95,46 @@ if(isset($_POST['showAlljobs']))
     <!-- Favicon and touch icons -->
 
     <link rel="shortcut icon" href="assets/ico/linkedin.ico">
+
+    <style>
+       .viewButton {
+         color: #333;
+         background-color: #fcf8e3;
+         border-color: #f0ad4e;
+       }
+       .viewButton:hover {
+         color: #f5f5f5;
+         background-color: #9999ff;
+         border-color: #333;
+       }
+
+      .modal_size_modify {
+        height: 400px;
+      }
+       .btn_apply {
+         color: #fff;
+         background-color: #5bc0de;
+         border-color: #46b8da;
+       }
+       .btn_apply:hover {
+         color: #5bc0de;
+         background-color: #fff;
+         border-color: #8EBB1A;
+       }
+    </style>
+    <script >
+    $(document).on('submit', '#info_form', function()
+{
+ $.post('info_view.php', $(this).serialize(), function(data)
+ {
+  $("#msg").html(data);
+ });
+
+ return false;
+
+});
+
+   </script>
 </head>
 <body id="bodyID">
     <!-- Top menu -->
@@ -134,6 +174,20 @@ if(isset($_POST['showAlljobs']))
       </div>
     </nav>
 
+    <!-- For showing information when user click apply button in the modal -->
+     <?php
+            if(isset($_POST['apply'])){
+
+              echo "<div class='alert alert-success'>";
+              echo "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
+              echo "<strong>You've submitted your application successfully!</strong>";
+              echo "</div> ";
+
+         }
+
+
+      ?>
+
     <!-- search bar -->
            <hr>
             <div class="container">
@@ -155,7 +209,7 @@ if(isset($_POST['showAlljobs']))
                         <span class="input-group-btn wow bounceInRight">
                             <button class="btn btn-default" name="searchBtn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                         </span>
-                        
+
                         <span class="input-group-btn wow bounceInRight">
                             <button class="btn btn-default" name="showAlljobs" type="submit">Show all</button>
                         </span>
@@ -168,13 +222,13 @@ if(isset($_POST['showAlljobs']))
           <br>
            <br>
             <?php
-  
+
 
   $strQuery = "SELECT salary, company FROM job;";
 
   $result1 = $dbhandle->query($strQuery) or exit("Error code ({$dbhandle->errno}): {$dbhandle->error}");
   if ($result1) {
-          
+
   $arrData = array(
       "chart" => array(
           "caption"=> "All jobs' payment",
@@ -226,22 +280,22 @@ if(isset($_POST['showAlljobs']))
 
           $arrData["data"] = array();
 
-  
+
           while($row1 = mysqli_fetch_array($result1)) {
           array_push($arrData["data"], array(
           "label" => $row1["company"],
           "value" => $row1["salary"]
           )
         );
-          } 
-  
+          }
+
             $jsonEncodedData = json_encode($arrData);
-      
+
               $columnChart = new FusionCharts("column2d", "expenseChart" , "100%", "500", "column-chart", "json", $jsonEncodedData);
              $columnChart->render();
-       
+
              $dbhandle->close();
-           
+
          }
 
 ?>
@@ -249,6 +303,8 @@ if(isset($_POST['showAlljobs']))
             <br>
            <br><br>
            <br>
+
+
             <div class="container">
                <h1 class="wow rotateIn">Search results</h1><br>
            <br>
@@ -267,14 +323,42 @@ if(isset($_POST['showAlljobs']))
 
                               $tbClass = array("success wow bounceIn", "danger wow bounceIn", "info wow bounceIn");
                               $i = 0;
+                            /*
                              while($row = mysql_fetch_array($result)){
                                    echo "<tr class='$tbClass[$i]'>";
                                    echo "<td>" . $row['company'] . "</td>";
                                    echo "<td>" . $row['job_title'] . "</td>";
                                    echo "<td>" . $row['job_description'] . "</td>";
                                    echo "<td>" . $row['application_deadline'] . "</td>";
-                                   echo "<td><input class='btn btn-default' type='submit' name='view' value='View'></td>";
+                                   echo "<td><button type='button' name='view' class='btn viewButton' data-toggle='modal' data-target='#my_modal'>View</button></td>";
                                    echo "</tr>";
+                                   $i++;
+
+                                   if($i == 3)
+                                    $i = 0;
+                             }
+                           */
+
+                              while($row = mysql_fetch_array($result)){
+
+                                echo "<form method='post' id='info_form'>";
+
+                                   echo "<tr class='$tbClass[$i]'>";
+                                   echo "<td><input type='hidden'  name='company' value='".$row['company']."'> ". $row['company'] ." </td>";
+                                   echo "<td><input type='hidden' name='job_title' value='".$row['job_title']."'> ". $row['job_title'] ." </td>";
+                                   echo "<td><input type='hidden' name='description' value='".$row['job_description']."'> ". $row['job_description'] ." </td>";
+                                   echo "<td><input type='hidden' name='deadline' value='".$row['application_deadline']."'> ". $row['application_deadline'] ." </td>";
+                                   echo "<td><button type='submit' class='btn viewButton' data-toggle='modal' data-target='#my_modal' >View</button></td>";
+                                   echo "</tr>";
+
+                                /* when click view button in each row of the table, you can the following info */
+                                    echo "<input type='hidden' name='location' value='".$row['location']."'> ";
+                                    echo "<input type='hidden' name='industry' value='".$row['industry']."'> ";
+                                    echo "<input type='hidden' name='experience_level' value='".$row['experience_level']."'> ";
+
+
+                               echo "</form>";
+
                                    $i++;
 
                                    if($i == 3)
@@ -282,30 +366,43 @@ if(isset($_POST['showAlljobs']))
                              }
 
 
+
                       ?>
-                    <!--
-                          <tr class="success ">
-                            <td>Apple</td>
-                            <td>Graphic design</td>
-                            <td>something typing codes</td>
-                            <td>$150,000 per year</td>
-                          </tr>
-                          <tr class="danger ">
-                            <td>Blizzard</td>
-                            <td>Game tester</td>
-                            <td>Only one requirement: you must have played Blizzard's games.</td>
-                            <td>$100,000 per year</td>
-                          </tr>
-                          <tr class="info ">
-                            <td>Google</td>
-                            <td>Google translator</td>
-                            <td>at least knowing two languages</td>
-                            <td>$120,000 per year</td>
-                          </tr>
-                       -->
+
                     </tbody>
                  </table>
               </div>
+
+              <!-- Modal for view button -->
+             <div class="modal fade" id="my_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+               <div class="modal-dialog modal-lg">
+                 <div class="modal-content modal_size_modify">
+                   <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
+
+                        <h3 class="modal-title" id="modal-register-label">More Job information</h3>
+                    </div>
+
+                   <div class="jumbotron">
+                       <p id="msg"></p>
+                 </div>
+                 <hr>
+                 <div>
+                   <form action="search_job.php" method="post">
+                 <button type="submit" name="apply" class="btn btn_apply pull-right">Apply</button>
+                   </form>
+
+               </div>
+             </div>
+           </div>
+         </div>
+
+
+
+
+
 
 
 </body>

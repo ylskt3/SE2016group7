@@ -26,27 +26,30 @@ create table user(
 DROP TABLE IF EXISTS education;
 create table education(
     user_id int references user(user_id),
-    school varchar(50) not null,
-    location varchar(100) not null,
+    school varchar(50),
+    edu_location varchar(100),
     gpa varchar(10),
+    major varchar(50),
     dates_attended varchar(50),
+    dates_graduated varchar(50),
     field_of_study varchar(50),
     degree varchar (50),
     activities_and_societies varchar(500),
-    description varchar(500),
-    primary key(user_id, school, location)
+    edu_description varchar(500),
+    primary key(user_id)
 );
 
 #PROFILE PAGE
 DROP TABLE IF EXISTS experience;
 create table experience(
     user_id int references user(user_id),
-    company varchar(20) not null,
-    title varchar(50) not null,
-    location varchar(50) not null,
-    time_period varchar(20) not null,
-    description varchar(500),
-    primary key(user_id, company, title)
+    exp_company varchar(20) not null,
+    exp_title varchar(50) not null,
+    exp_location varchar(50) not null,
+    exp_time_begin varchar(20) not null,
+    exp_time_end varchar(20) not null,
+    exp_description varchar(500),
+    primary key(user_id)
 );
 
 #PROFILE PAGE
@@ -56,9 +59,10 @@ create table volunteer(
     organization varchar(50) not null,
     role varchar(50),
     cause varchar(50) not null,
-    dates varchar(20),
-    description varchar(500),
-    primary key(user_id, organization, role)
+    vol_start_date varchar(20),
+    vol_end_date varchar(20),
+    vol_description varchar(500),
+    primary key(user_id)
 );
 
 #PROFILE PAGE
@@ -185,39 +189,10 @@ create table number_of_views(
 );
 
 #My Version XD (whichever works boys!)
-DROP TABLE IF EXISTS profile_views;d
+DROP TABLE IF EXISTS profile_views;
 create table profile_views(
     user_id int references user(user_id),
-    date timestamp default current_timestamp,
-    data1 int,
-    data2 int,
-    data3 int,
-    data4 int,
-    data5 int,
-    data6 int,
-    data7 int,
-    data8 int,
-    data9 int,
-    data10 int,
-    data11 int,
-    data12 int,
-    data13 int,
-    data14 int,
-    data15 int,
-    data16 int,
-    data17 int,
-    data18 int,
-    data19 int,
-    data20 int,
-    data21 int,
-    data22 int,
-    data23 int,
-    data24 int,
-    data25 int,
-    data26 int,
-    data27 int,
-    data28 int,
-    data29 int,
-    data30 int,
+    view_dates timestamp default current_timestamp,
+    dates int(31),
     primary key(user_id)
 );
